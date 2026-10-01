@@ -1,0 +1,14 @@
+// Add to app/build.gradle.kts
+// local.properties:  ANTHROPIC_KEY=sk-ant-...   (testing only, never ship a key in an APK)
+import java.util.Properties
+android {
+    buildFeatures { buildConfig = true }
+    defaultConfig {
+        val p = Properties().apply { rootProject.file("local.properties").inputStream().use { load(it) } }
+        buildConfigField("String", "ANTHROPIC_KEY", "\"${p.getProperty("ANTHROPIC_KEY")}\"")
+    }
+}
+dependencies {
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+}
