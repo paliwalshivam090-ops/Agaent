@@ -1,11 +1,13 @@
-// Add to app/build.gradle.kts
-// local.properties:  ANTHROPIC_KEY=sk-ant-...   (testing only, never ship a key in an APK)
+// local.properties:
+//   BACKEND_URL=https://YOUR-SERVICE.onrender.com
+//   APP_TOKEN=same-secret-you-set-on-Render
 import java.util.Properties
 android {
     buildFeatures { buildConfig = true }
     defaultConfig {
         val p = Properties().apply { rootProject.file("local.properties").inputStream().use { load(it) } }
-        buildConfigField("String", "ANTHROPIC_KEY", "\"${p.getProperty("ANTHROPIC_KEY")}\"")
+        buildConfigField("String", "BACKEND_URL", "\"${p.getProperty("BACKEND_URL")}\"")
+        buildConfigField("String", "APP_TOKEN", "\"${p.getProperty("APP_TOKEN")}\"")
     }
 }
 dependencies {
